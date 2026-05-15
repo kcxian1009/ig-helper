@@ -265,7 +265,7 @@ function onSearch(val){
 
 function highlightText(t,q){
   if(!q) return t;
-  const esc=q.replace(/[.*+?^${}()|[\]\]/g,'\$&');
+  const esc=q.replace(/[.*+?^${}()|[\\]\\]/g,'\\$&');
   return t.replace(new RegExp(esc,'gi'),m=>'<span class="highlight">'+m+'</span>');
 }
 
