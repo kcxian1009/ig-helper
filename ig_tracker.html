@@ -195,22 +195,26 @@ function setSyncStatus(msg){document.getElementById('syncStatus').textContent=ms
 const DB_URL = 'https://ig-helper-b56db-default-rtdb.asia-southeast1.firebasedatabase.app/checked_v2.json';
 let renderDone = false;
 
-// 3秒後強制顯示
+// 2秒後強制顯示
 setTimeout(()=>{
   if(!renderDone){ setSyncStatus('⚠️ 離線模式'); render(); }
-}, 3000);
+}, 2000);
 
 // 用 fetch 讀取
 fetch(DB_URL)
-  .then(r=>r.json())
+  .then(r=>{
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    return r.json();
+  })
   .then(val=>{
     checked = (val && typeof val === 'object') ? val : {};
     setSyncStatus('☁️ 已同步');
-    render();
+    if(!renderDone) render(); else updateProgress();
   })
-  .catch(()=>{
+  .catch(err=>{
+    console.error('Firebase fetch error:', err);
     setSyncStatus('⚠️ 離線模式');
-    render();
+    if(!renderDone) render();
   });
 
 function saveChecked(){
