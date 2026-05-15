@@ -192,7 +192,8 @@ const typeOrder = ['reel','post','stories','other'];
 function makeId(day,i){return day+'_'+i}
 function setSyncStatus(msg){document.getElementById('syncStatus').textContent=msg;}
 
-const DB_URL = 'https://ig-helper-b56db-default-rtdb.asia-southeast1.firebasedatabase.app/checked_v2.json';
+const FIREBASE_API_KEY = 'AIzaSyC0nlBeJe2ZUpOSiTHlRXGfWGjYxGRfmkk';
+const DB_URL = 'https://ig-helper-b56db-default-rtdb.asia-southeast1.firebasedatabase.app/checked_v2.json?auth=' + FIREBASE_API_KEY;
 let renderDone = false;
 
 // 2秒後強制顯示
