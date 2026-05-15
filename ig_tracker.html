@@ -205,7 +205,12 @@ const typeOrder = ['reel','post','stories','other'];
 function makeId(day,i){return day+'_'+i}
 function setSyncStatus(msg){document.getElementById('syncStatus').textContent=msg;}
 
-// 載入 Firebase 資料後 render
+// 載入 Firebase 資料後 render，5秒後強制顯示
+let renderDone = false;
+setTimeout(()=>{
+  if(!renderDone){ setSyncStatus('⚠️ 離線模式'); render(); }
+}, 5000);
+
 db.ref(CHECKED_REF).once('value').then(snap=>{
   checked = snap.val()||{};
   setSyncStatus('☁️ 已同步');
@@ -326,6 +331,7 @@ function clearAll(){
 
 function render(){
   rendered=true;
+  renderDone=true;
   const main=document.getElementById('main');
   main.innerHTML='';
   Object.entries(data).forEach(([day,items])=>{
