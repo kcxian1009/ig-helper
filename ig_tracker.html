@@ -189,7 +189,7 @@ const typeInfo = {
 };
 const typeOrder = ['reel','post','stories','other'];
 
-function makeId(day,i){return day+'_'+i}
+function makeId(day,i){return day.replace('/','_')+'_'+i}
 function setSyncStatus(msg){document.getElementById('syncStatus').textContent=msg;}
 
 const DB_URL = 'https://ig-helper-b56db-default-rtdb.asia-southeast1.firebasedatabase.app/checked_v4.json';
