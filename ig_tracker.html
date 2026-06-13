@@ -284,7 +284,7 @@ function applyFilter(){
         let show=true;
         if(currentFilter==='unread') show=!isChecked;
         else if(currentFilter==='read') show=isChecked;
-        else if(['5/25','5/26','5/27','5/28','5/29'].includes(currentFilter)) show=day===currentFilter;
+        else if(Object.keys(data).includes(currentFilter)) show=day===currentFilter;
         if(show&&searchQuery) show=item.sender.toLowerCase().includes(searchQuery);
         card.classList.toggle('hidden',!show);
         const sEl=card.querySelector('.sender');
